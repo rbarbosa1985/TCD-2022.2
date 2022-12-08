@@ -1,0 +1,65 @@
+.home-container {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  vertical-align: middle;
+  height: 100vh;
+}
+
+.home-card {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  flex-direction: column;
+  padding: 5px;
+  border-radius: 10px;
+  width: 40%;
+}
+
+.home-title {
+  margin: 10px 10px;
+  text-align: center;
+}
+
+.home-logo {
+  width: 30%;
+  height: 30%;
+}
+
+.home-form {
+  margin: 20px;
+}
+
+.home-input {
+  align-self: center;
+  margin-right: 20px;
+  font: 1em sans-serif;
+}
+
+.home-login-link-recover {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: end;
+}
+
+.home-login-btn {
+  width: 100%;
+}
+
+
+@media screen and (max-device-width:640px),
+screen and (max-width:640px) {
+  .home-container {
+    padding: 20px;
+  }
+
+  .home-card {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    flex-direction: column;
+    padding: 5px;
+    border-radius: 10px;
+    width: 100%;
+  }
+}

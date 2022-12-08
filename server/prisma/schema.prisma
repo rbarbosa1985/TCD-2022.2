@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String      @id @default(cuid())
+  email     String      @unique
+  password  String
+  imgUrl    String
+  name      String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  UserRoles UserRoles[]
+}
+
+model UserRoles {
+  id      String @id @default(cuid())
+  userId  String
+  rolesId String
+  user    User   @relation(fields: [userId], references: [id])
+  roles   Roles  @relation(fields: [rolesId], references: [id])
+}
+
+model Roles {
+  id        String      @id @default(cuid())
+  name      String
+  UserRoles UserRoles[]
+}
+
+model Room {
+  id          String        @id @default(cuid())
+  name        String
+  description String
+  variation   Int
+  imgUrl      String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  Measurement Measurement[]
+}
+
+model Thermohygrometer {
+  id          String        @id @default(cuid())
+  name        String
+  ipAddress   String
+  model       String
+  macAddress  String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  Measurement Measurement[]
+}
+
+model Measurement {
+  id                 String           @id @default(cuid())
+  temperature        Float
+  moisture           Float
+  longevity          Float
+  date               DateTime
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  roomId             String
+  thermohygrometerId String
+  room               Room             @relation(fields: [roomId], references: [id])
+  thermohygrometer   Thermohygrometer @relation(fields: [thermohygrometerId], references: [id])
+}
